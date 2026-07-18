@@ -1,0 +1,11 @@
+[project]
+name = "conversational-memory-rag"
+version = "0.1.0"
+description = "Conversational Memory RAG built from first principles."
+requires-python = ">=3.12"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
