@@ -22,3 +22,6 @@ class Conversation:
     @property
     def messages(self) -> tuple[Message, ...]:
         return tuple(self._messages)
+
+    def get_last_message(self) -> Message:
+        return self._messages[-1]
