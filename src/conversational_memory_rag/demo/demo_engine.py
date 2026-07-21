@@ -1,4 +1,5 @@
 from conversational_memory_rag.application.conversation_engine import ConversationEngine
+from conversational_memory_rag.application.default_prompt_builder import DefaultPromptBuilder
 
 from conversational_memory_rag.infrastructure.mock_generator import MockGenerator
 
@@ -16,6 +17,7 @@ conversation.add_message(
 )
 
 engine = ConversationEngine(
+    prompt_builder=DefaultPromptBuilder(),
     generator=MockGenerator()
 )
 
