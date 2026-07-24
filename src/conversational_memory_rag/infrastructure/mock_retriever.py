@@ -13,7 +13,7 @@ class MockRetriever(Retriever):
         return RetrievalResult(
             chunks=(
                 RetrievedChunk(
-                    content="Amazon Bedrock is a fully managed service...",
+                    content="Amazon Bedrock is a fully managed service... (This is a mock Retriever)",
                     source="bedrock.pdf",
                     chunk_number=12,
                     score=0.98
