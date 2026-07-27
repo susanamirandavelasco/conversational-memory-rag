@@ -27,3 +27,13 @@ The Retriever returns a RetrievalResult instead of a list of strings.
 ### Rationale
 
 A retrieval operation may evolve to include additional information such as relevance score, metadata, execution time, or retrieval strategy. Returning a domain object keeps the API stable while allowing future evolution.
+
+## ADR-004
+
+### Decision
+
+Introduce a MemoryManager abstraction responsible for selecting the conversational context provided to the LLM.
+
+### Rationale
+
+Different memory strategies may be required depending on conversation length or token limits. Encapsulating this decision allows new strategies to be introduced without modifying the ConversationEngine.

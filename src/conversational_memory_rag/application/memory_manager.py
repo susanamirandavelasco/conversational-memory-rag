@@ -1,0 +1,14 @@
+from abc import ABC, abstractmethod
+
+from conversational_memory_rag.domain.conversation import Conversation
+from conversational_memory_rag.domain.message import Message
+
+
+class MemoryManager(ABC):
+
+    @abstractmethod
+    def get_context(
+        self,
+        conversation: Conversation
+    ) -> tuple[Message, ...]:
+        pass
