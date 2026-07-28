@@ -2,33 +2,43 @@ from conversational_memory_rag.application.prompt_builder import PromptBuilder
 
 from conversational_memory_rag.domain.conversation import Conversation
 from conversational_memory_rag.domain.retrieval_result import RetrievalResult
+from conversational_memory_rag.domain.message import Message
 
 
+SYSTEM_PROMPT = """
+    You are an AWS Bedrock expert.
+
+    Answer only using the provided context.
+    """
 
 class DefaultPromptBuilder(PromptBuilder):
 
     def build(
         self,
-        conversation: Conversation,
+        conversation_context: tuple[Message, ...],
         retrieval_result: RetrievalResult
     ) -> str:
 
-        question = conversation.get_last_message().content
+        history = "\n".join(
+            f"{message.role.name}: {message.content}"
+            for message in conversation_context
+        )
 
-        context = "\n\n".join(
+        retrieved_context = "\n\n".join(
             chunk.content
             for chunk in retrieval_result.chunks
         )
 
         return f"""
-            You are an AWS Bedrock expert.
-            Answer only using the following context. 
+            {SYSTEM_PROMPT}
 
-            Context:
-            {context}
+            Conversation:
 
-            Question:
-            {question}
+            {history}
 
-            Answer:
+            Retrieved Context:
+
+            {retrieved_context}
+
+            Assistant:
             """

@@ -4,6 +4,8 @@ from conversational_memory_rag.application.default_prompt_builder import Default
 
 from conversational_memory_rag.infrastructure.mock_generator import MockGenerator
 from conversational_memory_rag.infrastructure.mock_retriever import MockRetriever
+from conversational_memory_rag.infrastructure.last_messages_memory_manager import (
+    LastMessagesMemoryManager,)
 
 from conversational_memory_rag.domain.conversation import Conversation
 from conversational_memory_rag.domain.message import Message
@@ -25,6 +27,7 @@ def main():
     )
 
     engine = ConversationEngine(
+        memory_manager=LastMessagesMemoryManager(),
         retriever=MockRetriever(),
         prompt_builder=DefaultPromptBuilder(),
         generator=MockGenerator()
