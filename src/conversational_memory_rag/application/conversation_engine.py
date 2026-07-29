@@ -7,6 +7,8 @@ from conversational_memory_rag.application.memory_manager import MemoryManager
 from conversational_memory_rag.domain.message import Message
 from conversational_memory_rag.domain.role import Role
 from conversational_memory_rag.domain.conversation import Conversation
+from conversational_memory_rag.domain.conversation_context import ConversationContext
+
 
 
 class ConversationEngine:
@@ -25,7 +27,7 @@ class ConversationEngine:
 
     def ask(
         self,
-        conversation: Conversation
+        conversation: ConversationContext,
     ) -> str:
 
         # 1. Get the question
