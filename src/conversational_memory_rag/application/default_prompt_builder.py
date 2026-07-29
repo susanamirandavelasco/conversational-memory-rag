@@ -3,6 +3,7 @@ from conversational_memory_rag.application.prompt_builder import PromptBuilder
 from conversational_memory_rag.domain.conversation import Conversation
 from conversational_memory_rag.domain.retrieval_result import RetrievalResult
 from conversational_memory_rag.domain.message import Message
+from conversational_memory_rag.domain.prompt import Prompt
 
 
 SYSTEM_PROMPT = """
@@ -29,16 +30,13 @@ class DefaultPromptBuilder(PromptBuilder):
             for chunk in retrieval_result.chunks
         )
 
-        return f"""
-            {SYSTEM_PROMPT}
-
-            Conversation:
-
-            {history}
-
-            Retrieved Context:
-
-            {retrieved_context}
-
-            Assistant:
-            """
+        return Prompt(
+                content=f"""
+                    {SYSTEM_PROMPT}
+                    Conversation:
+                    {history}
+                    Retrieved Context:
+                    {retrieved_context}
+                    Assistant:
+                    """
+                    )

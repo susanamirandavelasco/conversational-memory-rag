@@ -6,6 +6,8 @@ from conversational_memory_rag.infrastructure.mock_generator import MockGenerato
 from conversational_memory_rag.infrastructure.mock_retriever import MockRetriever
 from conversational_memory_rag.infrastructure.last_messages_memory_manager import (
     LastMessagesMemoryManager,)
+from conversational_memory_rag.infrastructure.openai_generator import OpenAIGenerator
+
 
 from conversational_memory_rag.domain.conversation import Conversation
 from conversational_memory_rag.domain.message import Message
@@ -30,7 +32,7 @@ def main():
         memory_manager=LastMessagesMemoryManager(),
         retriever=MockRetriever(),
         prompt_builder=DefaultPromptBuilder(),
-        generator=MockGenerator()
+        generator=OpenAIGenerator()
     )
 
     response = engine.ask(conversation)

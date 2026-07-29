@@ -42,7 +42,8 @@ class ConversationEngine:
         # 4. Build the prompt
         prompt = self._prompt_builder.build(
             conversation_context=conversation_context,
-            retrieval_result=retrieval_result)
+            retrieval_result=retrieval_result
+            )   
 
         # 5. Build the response
         response = self._generator.generate(prompt)
