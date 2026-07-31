@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
 from conversational_memory_rag.domain.retrieval_result import RetrievalResult
+from conversational_memory_rag.domain.conversation_context import ConversationContext
 
 
 class Retriever(ABC):
@@ -8,6 +9,6 @@ class Retriever(ABC):
     @abstractmethod
     def retrieve(
         self,
-        query: str
+        conversation_context: ConversationContext
     ) -> RetrievalResult:
         pass

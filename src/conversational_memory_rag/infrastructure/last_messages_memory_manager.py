@@ -2,6 +2,8 @@ from conversational_memory_rag.application.memory_manager import MemoryManager
 
 from conversational_memory_rag.domain.conversation import Conversation
 from conversational_memory_rag.domain.message import Message
+from conversational_memory_rag.domain.conversation_context import ConversationContext
+
 
 
 class LastMessagesMemoryManager(MemoryManager):
@@ -17,4 +19,8 @@ class LastMessagesMemoryManager(MemoryManager):
         conversation: Conversation
     ) -> tuple[Message, ...]:
 
-        return conversation.messages[-self._max_messages:]
+        return ConversationContext(
+            messages=tuple(
+            conversation.messages[-self._max_messages:]
+            )
+        )

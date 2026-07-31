@@ -24,7 +24,7 @@ def main():
     conversation.add_message(
         Message(
             role=Role.USER,
-            content="What is Amazon Bedrock (This is a demo question)?"
+            content="What is Amazon Bedrock ?"
         )
     )
 

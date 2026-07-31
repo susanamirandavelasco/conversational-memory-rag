@@ -22,7 +22,7 @@ class DefaultPromptBuilder(PromptBuilder):
 
         history = "\n".join(
             f"{message.role.name}: {message.content}"
-            for message in conversation_context
+            for message in conversation_context.messages
         )
 
         retrieved_context = "\n\n".join(
