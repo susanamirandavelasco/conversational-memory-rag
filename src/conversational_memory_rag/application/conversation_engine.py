@@ -45,6 +45,8 @@ class ConversationEngine:
             retrieval_result=retrieval_result
             )   
 
+        print(f"PROMPT: {prompt.content}")
+
         # 5. Build the response
         response = self._generator.generate(prompt)
 

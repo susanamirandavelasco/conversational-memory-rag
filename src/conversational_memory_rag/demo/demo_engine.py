@@ -1,9 +1,10 @@
 from conversational_memory_rag.application.conversation_engine import ConversationEngine
-
 from conversational_memory_rag.application.default_prompt_builder import DefaultPromptBuilder
 
-from conversational_memory_rag.infrastructure.mock_generator import MockGenerator
-from conversational_memory_rag.infrastructure.mock_retriever import MockRetriever
+
+from conversational_memory_rag.infrastructure.embedding_service import EmbeddingService
+from conversational_memory_rag.infrastructure.chroma_vector_store import ChromaVectorStore
+from conversational_memory_rag.infrastructure.chroma_retriever import ChromaRetriever
 from conversational_memory_rag.infrastructure.last_messages_memory_manager import (
     LastMessagesMemoryManager,)
 from conversational_memory_rag.infrastructure.openai_generator import OpenAIGenerator
@@ -28,12 +29,19 @@ def main():
         )
     )
 
+    embedding_service = EmbeddingService()
+
+    vector_store = ChromaVectorStore()
+
     engine = ConversationEngine(
         memory_manager=LastMessagesMemoryManager(),
-        retriever=MockRetriever(),
+        retriever = ChromaRetriever(
+            embedding_service=embedding_service,
+            vector_store=vector_store
+            ),
         prompt_builder=DefaultPromptBuilder(),
         generator=OpenAIGenerator()
-    )
+        )
 
     response = engine.ask(conversation)
 
