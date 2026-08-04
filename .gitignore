@@ -11,3 +11,8 @@ __pycache__/
 .venv/
 
 *.egg-info/
+
+*.pdf
+
+# ChromaDB
+chroma_db/

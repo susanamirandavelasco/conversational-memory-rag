@@ -4,6 +4,15 @@ version = "0.1.0"
 description = "Conversational Memory RAG built from first principles."
 requires-python = ">=3.12"
 
+dependencies = [
+    "openai>=1.0.0",
+    "chromadb>=1.0.0",
+    "python-dotenv>=1.0.0",
+    "pypdf>=5.0.0",
+    "PyMuPDF>=1.26.0",
+    "tiktoken>=0.9.0"
+]
+
 [tool.setuptools]
 package-dir = {"" = "src"}
 

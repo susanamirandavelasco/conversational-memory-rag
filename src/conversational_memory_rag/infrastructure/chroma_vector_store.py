@@ -59,8 +59,10 @@ class ChromaVectorStore(VectorStore):
             retrieved_chunks.append(
                 RetrievedChunk(
                     content=document,
-                    metadata=metadata,
-                    similarity=1 - distance
+                    source=metadata["source"],
+                    page_range=metadata["page_range"],
+                    chunk_number=metadata["chunk_number"],
+                    score=1 - distance
                 )
             )
 
