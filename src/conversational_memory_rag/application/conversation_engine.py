@@ -37,7 +37,10 @@ class ConversationEngine:
         conversation_context = self._memory_manager.get_context(conversation)
 
         # 3. Get the context (knowledge)
-        retrieval_result = self._retriever.retrieve(conversation_context)
+        retrieval_result = self._retriever.retrieve(
+            conversation_context, 
+            n_results=20
+            )
 
         # 4. Build the prompt
         prompt = self._prompt_builder.build(

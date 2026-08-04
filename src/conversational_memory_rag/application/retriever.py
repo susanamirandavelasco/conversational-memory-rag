@@ -9,6 +9,7 @@ class Retriever(ABC):
     @abstractmethod
     def retrieve(
         self,
-        conversation_context: ConversationContext
+        conversation_context: ConversationContext,
+        n_results: int
     ) -> RetrievalResult:
         pass

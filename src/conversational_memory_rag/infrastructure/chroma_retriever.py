@@ -21,8 +21,12 @@ class ChromaRetriever(Retriever):
 
     def retrieve(
         self,
-        conversation_context: ConversationContext
+        conversation_context: ConversationContext,
+        n_results: int
+
     ) -> RetrievalResult:
+
+        print(">>> RETRIEVER CALLED <<<")
 
         query = conversation_context.get_last_user_message().content
 
@@ -30,6 +34,10 @@ class ChromaRetriever(Retriever):
             query
         )
 
+        print(len(embedding))
+        print(embedding[:5])
+
         return self._vector_store.search(
-            embedding=embedding
+            embedding=embedding,
+            n_results=n_results
         )

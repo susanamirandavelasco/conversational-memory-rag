@@ -21,6 +21,8 @@ def main():
         end_page=2900
     )
 
+    print(vector_store._collection.count())
+
 
 if __name__ == "__main__":
     main()
