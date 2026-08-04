@@ -28,7 +28,8 @@ class ChromaRetriever(Retriever):
 
         print(">>> RETRIEVER CALLED <<<")
 
-        query = conversation_context.get_last_user_message().content
+        #query = conversation_context.get_last_user_message().content
+        query = conversation_context.rewritten_question
 
         embedding = self._embedding_service.generate(
             query

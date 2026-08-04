@@ -3,6 +3,8 @@ from conversational_memory_rag.application.prompt_builder import PromptBuilder
 from conversational_memory_rag.application.default_prompt_builder import DefaultPromptBuilder
 from conversational_memory_rag.application.retriever import Retriever
 from conversational_memory_rag.application.memory_manager import MemoryManager
+from conversational_memory_rag.application.question_rewriter import QuestionRewriter
+
 
 from conversational_memory_rag.domain.message import Message
 from conversational_memory_rag.domain.role import Role
@@ -18,12 +20,14 @@ class ConversationEngine:
         memory_manager: MemoryManager,
         prompt_builder: PromptBuilder,
         generator: Generator,
-        retriever: Retriever
+        retriever: Retriever,
+        question_rewriter: QuestionRewriter
     ):
         self._memory_manager = memory_manager
         self._prompt_builder = prompt_builder
         self._generator = generator
         self._retriever = retriever
+        self._question_rewriter = question_rewriter
 
     def ask(
         self,
@@ -35,6 +39,8 @@ class ConversationEngine:
 
         # 2. Get the memory
         conversation_context = self._memory_manager.get_context(conversation)
+
+        conversation_context = self._question_rewriter.rewrite(conversation_context)
 
         # 3. Get the context (knowledge)
         retrieval_result = self._retriever.retrieve(

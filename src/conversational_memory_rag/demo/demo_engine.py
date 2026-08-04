@@ -8,6 +8,7 @@ from conversational_memory_rag.infrastructure.chroma_retriever import ChromaRetr
 from conversational_memory_rag.infrastructure.last_messages_memory_manager import (
     LastMessagesMemoryManager,)
 from conversational_memory_rag.infrastructure.openai_generator import OpenAIGenerator
+from conversational_memory_rag.infrastructure.openai_question_rewriter import MockQuestionRewriter
 
 
 from conversational_memory_rag.domain.conversation import Conversation
@@ -35,12 +36,13 @@ def main():
 
     engine = ConversationEngine(
         memory_manager=LastMessagesMemoryManager(),
+        prompt_builder=DefaultPromptBuilder(),
+        generator=OpenAIGenerator(),
         retriever = ChromaRetriever(
             embedding_service=embedding_service,
             vector_store=vector_store
             ),
-        prompt_builder=DefaultPromptBuilder(),
-        generator=OpenAIGenerator()
+        question_rewriter = MockQuestionRewriter()
         )
 
     response = engine.ask(conversation)

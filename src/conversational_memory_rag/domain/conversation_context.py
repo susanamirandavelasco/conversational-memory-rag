@@ -7,9 +7,11 @@ class ConversationContext:
 
     def __init__(
         self,
-        messages: tuple[Message, ...]
+        messages: tuple[Message, ...],
+        rewritten_question: str | None = None
     ):
         self._messages = messages
+        self._rewritten_question = rewritten_question
 
     @property
     def messages(self) -> tuple[Message, ...]:
@@ -24,3 +26,7 @@ class ConversationContext:
                 return message
 
         raise ValueError("Conversation has no user messages.")
+
+    @property
+    def rewritten_question(self) -> str | None:
+        return self._rewritten_question
