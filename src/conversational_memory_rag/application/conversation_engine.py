@@ -42,6 +42,10 @@ class ConversationEngine:
 
         conversation_context = self._question_rewriter.rewrite(conversation_context)
 
+        print("\nREWRITTEN QUESTION:")
+        print(conversation_context.rewritten_question)
+        print()
+
         # 3. Get the context (knowledge)
         retrieval_result = self._retriever.retrieve(
             conversation_context, 
