@@ -4,6 +4,12 @@ from conversational_memory_rag.infrastructure.last_messages_memory_manager impor
 from conversational_memory_rag.infrastructure.mock_conversation_summarizer import (
     MockConversationSummarizer,
 )
+from conversational_memory_rag.infrastructure.openai_conversation_summarizer import (
+    OpenAIConversationSummarizer
+)
+from conversational_memory_rag.infrastructure.default_conversation_summarizer_prompt_builder import (
+    DefaultConversationSummarizerPromptBuilder
+)
 
 from conversational_memory_rag.domain.conversation import Conversation
 from conversational_memory_rag.domain.message import Message
@@ -14,7 +20,10 @@ def main():
 
     conversation = Conversation()
 
-    summarizer = MockConversationSummarizer()
+    #summarizer = MockConversationSummarizer()
+    summarizer = OpenAIConversationSummarizer(
+    prompt_builder=DefaultConversationSummarizerPromptBuilder()
+)
 
     memory = LastMessagesMemoryManager(
         summarizer=summarizer,
