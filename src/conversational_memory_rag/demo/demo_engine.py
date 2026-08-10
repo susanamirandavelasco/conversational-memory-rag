@@ -47,6 +47,13 @@ def main():
         )
     )
 
+    conversation.add_message(
+        Message(
+            role=Role.USER,
+            content="Who is his father ?"
+        )
+    )
+
     embedding_service = EmbeddingService()
 
     vector_store = ChromaVectorStore()
