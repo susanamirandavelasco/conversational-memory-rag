@@ -52,13 +52,21 @@ class ConversationEngine:
             n_results=20
             )
 
+        #temporal
+        #print("\nSUMMARY IN ENGINE:")
+
+        if conversation_context.summary:
+            print(conversation_context.summary.content)
+        else:
+            print("NO SUMMARY")
+
         # 4. Build the prompt
         prompt = self._prompt_builder.build(
             conversation_context=conversation_context,
             retrieval_result=retrieval_result
             )   
 
-        print(f"PROMPT: {prompt.content}")
+        #print(f"PROMPT: {prompt.content}")
 
         # 5. Build the response
         response = self._generator.generate(prompt)

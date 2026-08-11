@@ -51,8 +51,8 @@ class ChromaVectorStore(VectorStore):
         distances = results["distances"][0]
 
         #print(results["documents"])
-        print(results["metadatas"])
-        print(results["distances"])
+        #print(results["metadatas"])
+        #print(results["distances"])
 
         for document, metadata, distance in zip(
             documents,

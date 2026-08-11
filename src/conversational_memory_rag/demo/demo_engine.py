@@ -10,6 +10,13 @@ from conversational_memory_rag.infrastructure.last_messages_memory_manager impor
     LastMessagesMemoryManager,)
 from conversational_memory_rag.infrastructure.openai_generator import OpenAIGenerator
 from conversational_memory_rag.infrastructure.openai_question_rewriter import OpenAIQuestionRewriter
+from conversational_memory_rag.infrastructure.openai_conversation_summarizer import (
+    OpenAIConversationSummarizer
+)
+
+from conversational_memory_rag.infrastructure.default_conversation_summarizer_prompt_builder import (
+    DefaultConversationSummarizerPromptBuilder
+)
 
 
 from conversational_memory_rag.domain.conversation import Conversation
@@ -29,28 +36,49 @@ def main():
     conversation.add_message(
         Message(
             role=Role.USER,
-            content="What is Amazon Bedrock ?"
+            content="My favorite AWS service is Amazon Bedrock."
+        )
+    )
+
+    conversation.add_message(
+        Message(
+            role=Role.ASSISTANT,
+            content="Got it. Your favorite AWS service is Amazon Bedrock."
         )
     )
 
     conversation.add_message(
         Message(
             role=Role.USER,
-            content="Does it support Claude ?"
+            content="I am building a chatbot."
+        )
+    )
+
+    conversation.add_message(
+        Message(
+            role=Role.ASSISTANT,
+            content="That sounds interesting."
         )
     )
 
     conversation.add_message(
         Message(
             role=Role.USER,
-            content="How much is it ?"
+            content="The chatbot will use generative AI."
+        )
+    )
+
+    conversation.add_message(
+        Message(
+            role=Role.ASSISTANT,
+            content="Generative AI can be useful for that."
         )
     )
 
     conversation.add_message(
         Message(
             role=Role.USER,
-            content="Who is his father ?"
+            content="What is my favorite AWS service?"
         )
     )
 
@@ -58,8 +86,14 @@ def main():
 
     vector_store = ChromaVectorStore()
 
+    summarizer = OpenAIConversationSummarizer(
+        prompt_builder=DefaultConversationSummarizerPromptBuilder()
+    )
+
     engine = ConversationEngine(
-        memory_manager=LastMessagesMemoryManager(),
+        memory_manager=LastMessagesMemoryManager(
+                summarizer=summarizer
+            ),
         prompt_builder=DefaultPromptBuilder(),
         generator=OpenAIGenerator(),
         retriever = ChromaRetriever(
@@ -73,7 +107,7 @@ def main():
 
     response = engine.ask(conversation)
 
-    print("\nAssistant:\n")
+    #print("\nAssistant:\n")
     print(response)
 
 

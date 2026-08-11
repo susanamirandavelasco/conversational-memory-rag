@@ -72,7 +72,14 @@ def main():
 
     conversation_context = memory.get_context(conversation)
 
-    print()
+    print("\nSUMMARY:")
+
+    if conversation_context.summary:
+        print(conversation_context.summary.content)
+    else:
+        print("No summary")
+
+    print("----------------------")
 
     for message in conversation_context.messages:
         print(f"{message.role.name}: {message.content}")

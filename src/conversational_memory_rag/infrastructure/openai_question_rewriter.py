@@ -46,5 +46,6 @@ class OpenAIQuestionRewriter(QuestionRewriter):
 
         return ConversationContext(
             messages=conversation_context.messages,
-            rewritten_question=rewritten_question
+            rewritten_question=rewritten_question,
+            summary=conversation_context.summary
         )
