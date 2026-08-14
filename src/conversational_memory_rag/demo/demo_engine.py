@@ -107,7 +107,7 @@ def main():
 
     response = engine.ask(conversation)
 
-    #print("\nAssistant:\n")
+    print("\nAssistant:\n")
     print(response)
 
 
