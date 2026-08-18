@@ -44,6 +44,9 @@ class OpenAIQuestionRewriter(QuestionRewriter):
             .strip()
         )
 
+        print("\nREWRITTEN QUESTION:")
+        print(rewritten_question)
+
         return ConversationContext(
             messages=conversation_context.messages,
             rewritten_question=rewritten_question,

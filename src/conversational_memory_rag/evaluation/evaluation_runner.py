@@ -30,9 +30,13 @@ class EvaluationRunner:
         case: EvaluationCase
     ) -> EvaluationResult:
 
+        print(f"\nRUNNING CASE: {case.case_id}")
+
         actual_answer = self._engine.ask(
             case.conversation
         )
+
+        print(f"ANSWER RECEIVED: {case.case_id}")
 
         result = EvaluationResult(
             case_id=case.case_id,
@@ -42,9 +46,13 @@ class EvaluationRunner:
             actual_answer=actual_answer
         )
 
+        print(f"JUDGING: {case.case_id}")
+
         result.evaluation_score = self._evaluator.evaluate(
             result
         )
+
+        print(f"JUDGE DONE: {case.case_id}")
 
         return result
 

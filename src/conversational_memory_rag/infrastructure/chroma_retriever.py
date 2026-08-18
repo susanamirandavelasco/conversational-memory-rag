@@ -35,8 +35,8 @@ class ChromaRetriever(Retriever):
             query
         )
 
-        print(len(embedding))
-        print(embedding[:5])
+        #print(len(embedding))
+        #print(embedding[:5])
 
         return self._vector_store.search(
             embedding=embedding,
