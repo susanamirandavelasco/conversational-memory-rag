@@ -21,13 +21,15 @@ class ConversationEngine:
         prompt_builder: PromptBuilder,
         generator: Generator,
         retriever: Retriever,
-        question_rewriter: QuestionRewriter
+        question_rewriter: QuestionRewriter,
+        n_results: int = 3
     ):
         self._memory_manager = memory_manager
         self._prompt_builder = prompt_builder
         self._generator = generator
         self._retriever = retriever
         self._question_rewriter = question_rewriter
+        self._n_results = n_results
 
     def ask(
         self,
@@ -49,7 +51,7 @@ class ConversationEngine:
         # 3. Get the context (knowledge)
         retrieval_result = self._retriever.retrieve(
             conversation_context, 
-            n_results=20
+            n_results=self._n_results
             )
 
         #temporal
