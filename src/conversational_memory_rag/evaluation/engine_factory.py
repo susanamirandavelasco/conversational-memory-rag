@@ -34,6 +34,10 @@ from conversational_memory_rag.infrastructure.no_op_question_rewriter import (
     NoOpQuestionRewriter
 )
 
+from conversational_memory_rag.infrastructure.no_op_conversation_summarizer import (
+    NoOpConversationSummarizer
+)
+
 from conversational_memory_rag.application.conversation_engine import ConversationEngine
 
 from conversational_memory_rag.application.default_question_rewriter_prompt_builder import (
@@ -46,16 +50,20 @@ from conversational_memory_rag.application.default_prompt_builder import (
 
 def build_engine(
     n_results: int = 3,
-    use_question_rewriter: bool = True
+    use_question_rewriter: bool = True,
+    use_summary: bool = True
     ) -> ConversationEngine:
 
         embedding_service = EmbeddingService()
 
         vector_store = ChromaVectorStore()
 
-        summarizer = OpenAIConversationSummarizer(
-            prompt_builder=DefaultConversationSummarizerPromptBuilder()
-        )
+        if use_summary:
+            summarizer = OpenAIConversationSummarizer(
+                prompt_builder=DefaultConversationSummarizerPromptBuilder()
+            )
+        else:
+            summarizer = NoOpConversationSummarizer()
 
         memory_manager = LastMessagesMemoryManager(
             summarizer=summarizer,
