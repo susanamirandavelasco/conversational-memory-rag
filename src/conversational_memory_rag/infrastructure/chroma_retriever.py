@@ -26,17 +26,12 @@ class ChromaRetriever(Retriever):
 
     ) -> RetrievalResult:
 
-        print(">>> RETRIEVER CALLED <<<")
-
         #query = conversation_context.get_last_user_message().content
         query = conversation_context.rewritten_question
 
         embedding = self._embedding_service.generate(
             query
         )
-
-        #print(len(embedding))
-        #print(embedding[:5])
 
         return self._vector_store.search(
             embedding=embedding,

@@ -44,31 +44,17 @@ class ConversationEngine:
 
         conversation_context = self._question_rewriter.rewrite(conversation_context)
 
-        #print("\nREWRITTEN QUESTION:")
-        #print(conversation_context.rewritten_question)
-        #print()
-
         # 3. Get the context (knowledge)
         retrieval_result = self._retriever.retrieve(
             conversation_context, 
             n_results=self._n_results
             )
 
-        #temporal
-        #print("\nSUMMARY IN ENGINE:")
-
-        #if conversation_context.summary:
-        #    print(conversation_context.summary.content)
-        #else:
-        #    print("NO SUMMARY")
-
         # 4. Build the prompt
         prompt = self._prompt_builder.build(
             conversation_context=conversation_context,
             retrieval_result=retrieval_result
             )   
-
-        #print(f"PROMPT: {prompt.content}")
 
         # 5. Build the response
         response = self._generator.generate(prompt)
