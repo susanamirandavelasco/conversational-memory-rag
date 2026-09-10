@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install project
+        run: python -m pip install --upgrade pip && pip install -e ".[dev]"
+      - name: Lint
+        run: >-
+          ruff check tests
+          src/conversational_memory_rag/config.py
+          src/conversational_memory_rag/infrastructure/embedding_service.py
+          src/conversational_memory_rag/infrastructure/chroma_vector_store.py
+          src/conversational_memory_rag/infrastructure/mock_retriever.py
+          src/conversational_memory_rag/infrastructure/openai_generator.py
+          src/conversational_memory_rag/infrastructure/openai_question_rewriter.py
+          src/conversational_memory_rag/infrastructure/openai_conversation_summarizer.py
+          src/conversational_memory_rag/evaluation/llm_judge_evaluator.py
+      - name: Test
+        run: pytest
