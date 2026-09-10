@@ -153,7 +153,7 @@ The implemented strategy keeps a limited window of recent messages while maintai
 Conceptually:
 
 ```text
-ull Conversation
+Full Conversation
        │
        ├──────────────► Summarizer ──► Summary
        │
@@ -572,15 +572,25 @@ On Windows:
 pip install -r requirements.txt
 ```
 
+For development (tests and linting):
+
+```bash
+pip install -e ".[dev]"
+```
+
 ## 4. Configure the OpenAI API key
 
-Create a `.env` file or export the environment variable:
+Copy `.env.example` to `.env` and add your API key, or export the environment
+variable:
 
 ```bash
 export OPENAI_API_KEY="your-api-key"
 ```
 
 Never commit API keys to the repository.
+
+The example file also documents optional settings for OpenAI models, request
+timeouts and retries, and ChromaDB storage.
 
 ## 5. Provide the document corpus
 
@@ -609,6 +619,14 @@ python -m conversational_memory_rag.demo.demo_engine
 ---
 
 # Running the Evaluations
+
+## Automated tests
+
+```bash
+pytest
+```
+
+The test suite does not call OpenAI and does not require an API key.
 
 ## Memory evaluation
 
